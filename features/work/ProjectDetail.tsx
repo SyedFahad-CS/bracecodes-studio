@@ -1,20 +1,58 @@
-import React, { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { PROJECTS } from '../../constants';
+import { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import RevealText from '../../components/animations/RevealText';
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Layers, Cpu } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useSanityQuery } from '../../hooks/useSanity';
+import { projectBySlugQuery, allProjectsQuery, urlFor } from '../../lib/sanity';
+import type { SanityProjectFull, SanityProject } from '../../types';
 
 const ProjectDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
-    const navigate = useNavigate();
 
-    const project = PROJECTS.find(p => p.slug === slug);
+    const { data: project, loading, error } = useSanityQuery<SanityProjectFull>(
+        projectBySlugQuery,
+        { slug }
+    );
+
+    // Fetch all projects for "next project" navigation
+    const { data: allProjects } = useSanityQuery<SanityProject[]>(allProjectsQuery);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [slug]);
+
+    // Loading state
+    if (loading) {
+        return (
+            <div className="bg-slate-50 min-h-screen pt-32">
+                <div className="container mx-auto px-6 md:px-12 animate-pulse">
+                    <div className="h-4 bg-slate-200 rounded w-32 mb-8" />
+                    <div className="max-w-4xl">
+                        <div className="h-8 bg-slate-200 rounded w-1/4 mb-6" />
+                        <div className="h-12 bg-slate-200 rounded w-3/4 mb-6" />
+                        <div className="h-6 bg-slate-200 rounded w-1/2 mb-20" />
+                    </div>
+                    <div className="aspect-video rounded-2xl bg-slate-200 mb-20" />
+                </div>
+            </div>
+        );
+    }
+
+    // Error state
+    if (error) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Failed to load project</h2>
+                    <p className="text-slate-400 mb-6">{error}</p>
+                    <Link to="/work" className="text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-2 justify-center">
+                        <ArrowLeft className="w-4 h-4" /> Back to Work
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     if (!project) {
         return (
@@ -30,13 +68,14 @@ const ProjectDetail: React.FC = () => {
     }
 
     // Find next project for navigation
-    const currentIndex = PROJECTS.findIndex(p => p.slug === slug);
-    const nextProject = PROJECTS[(currentIndex + 1) % PROJECTS.length];
+    const projects = allProjects ?? [];
+    const currentIndex = projects.findIndex(p => p.slug.current === slug);
+    const nextProject = projects.length > 0
+        ? projects[(currentIndex + 1) % projects.length]
+        : null;
 
     return (
         <div className="bg-slate-50 min-h-screen">
-            {/* Navbar Placeholder (if using fixed navbar, add spacing) */}
-
             {/* Hero Section */}
             <section className="pt-32 pb-16 relative overflow-hidden">
                 <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -54,10 +93,6 @@ const ProjectDetail: React.FC = () => {
                                 <span className="h-1 w-1 rounded-full bg-slate-300" />
                                 <span className="text-slate-500 text-xs font-bold tracking-widest uppercase">
                                     {project.client}
-                                </span>
-                                <span className="h-1 w-1 rounded-full bg-slate-300" />
-                                <span className="text-slate-400 text-xs font-medium tracking-widest uppercase">
-                                    2024
                                 </span>
                             </div>
                         </ScrollReveal>
@@ -83,12 +118,18 @@ const ProjectDetail: React.FC = () => {
             <section className="px-4 md:px-8 mb-20">
                 <div className="container mx-auto max-w-7xl">
                     <ScrollReveal delay={300}>
-                        <div className="rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-xl shadow-indigo-900/5 relative aspect-video md:aspect-[21/9]">
-                            <img
-                                src={`${project.image}?w=1600&q=95`}
-                                alt={project.title}
-                                className="w-full h-full object-cover"
-                            />
+                        <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl shadow-indigo-900/5 relative aspect-video md:aspect-21/9">
+                            {project.mainImage ? (
+                                <img
+                                    src={urlFor(project.mainImage).width(1600).quality(95).url()}
+                                    alt={project.mainImage.alt || project.title}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                                    <span className="text-slate-300">No Image</span>
+                                </div>
+                            )}
                         </div>
                     </ScrollReveal>
                 </div>
@@ -106,7 +147,7 @@ const ProjectDetail: React.FC = () => {
                                     <Layers className="w-3.5 h-3.5" /> Tech Stack
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
-                                    {(project.stack || project.tags).map(tech => (
+                                    {(project.stack || project.tags || []).map(tech => (
                                         <span key={tech} className="px-3 py-1.5 bg-white text-slate-600 text-xs font-medium rounded-full border border-slate-200 shadow-sm">
                                             {tech}
                                         </span>
@@ -169,10 +210,10 @@ const ProjectDetail: React.FC = () => {
                             <div className="space-y-6">
                                 {project.gallery.map((img, idx) => (
                                     <ScrollReveal key={idx} delay={600}>
-                                        <div className={`rounded-2xl overflow-hidden shadow-md ${idx % 3 === 0 ? 'aspect-[21/9]' : 'aspect-video md:aspect-[16/9]'}`}>
+                                        <div className={`rounded-2xl overflow-hidden shadow-md ${idx % 3 === 0 ? 'aspect-21/9' : 'aspect-video'}`}>
                                             <img
-                                                src={`${img}?w=1200&q=90`}
-                                                alt={`${project.title} detail ${idx + 1}`}
+                                                src={urlFor(img).width(1200).quality(90).url()}
+                                                alt={img.alt || `${project.title} detail ${idx + 1}`}
                                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                                             />
                                         </div>
@@ -185,20 +226,22 @@ const ProjectDetail: React.FC = () => {
             </section>
 
             {/* Next Project Navigation */}
-            <section className="py-32 bg-slate-950 text-white relative overflow-hidden">
-                <div className="absolute inset-0 opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150 mix-blend-overlay"></div>
-                <div className="container mx-auto px-6 md:px-12 relative z-10 text-center">
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-6">Next Case Study</p>
-                    <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight">{nextProject.title}</h2>
-                    <Link
-                        to={`/work/${nextProject.slug}`}
-                        className="group inline-flex items-center gap-3 text-lg font-medium transition-all duration-300"
-                    >
-                        <span className="border-b border-white group-hover:border-indigo-400 group-hover:text-indigo-400 transition-colors pb-1">View Project</span>
-                        <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform group-hover:text-indigo-400" />
-                    </Link>
-                </div>
-            </section>
+            {nextProject && (
+                <section className="py-32 bg-slate-950 text-white relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150 mix-blend-overlay"></div>
+                    <div className="container mx-auto px-6 md:px-12 relative z-10 text-center">
+                        <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-6">Next Case Study</p>
+                        <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight">{nextProject.title}</h2>
+                        <Link
+                            to={`/work/${nextProject.slug.current}`}
+                            className="group inline-flex items-center gap-3 text-lg font-medium transition-all duration-300"
+                        >
+                            <span className="border-b border-white group-hover:border-indigo-400 group-hover:text-indigo-400 transition-colors pb-1">View Project</span>
+                            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform group-hover:text-indigo-400" />
+                        </Link>
+                    </div>
+                </section>
+            )}
         </div>
     );
 };

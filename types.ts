@@ -97,3 +97,30 @@ export interface SanityBlogPost {
 export interface SanityBlogPostFull extends SanityBlogPost {
   content: any[]; // Portable Text blocks
 }
+
+// Sanity Project Types
+export interface SanityProject {
+  _id: string;
+  title: string;
+  slug: SanitySlug;
+  client: string;
+  tags: string[];
+  mainImage: SanityImage;
+  description: string;
+  category: 'Web' | 'Mobile' | 'Enterprise' | 'Design';
+  videoUrl?: string;
+}
+
+export interface SanityProjectFull extends SanityProject {
+  fullDescription?: string;
+  challenge?: string;
+  solution?: string;
+  stack?: string[];
+  gallery?: SanityImage[];
+  isCaseStudy?: boolean;
+  stats?: string[];
+}
+
+export interface SanityCaseStudy extends SanityProject {
+  stats?: string[];
+}

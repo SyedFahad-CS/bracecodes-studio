@@ -7,7 +7,7 @@ import {
   Cpu,
   Globe
 } from 'lucide-react';
-import { ServiceItem, ProjectItem, NavItem, TeamMember, BlogPost } from './types';
+import { ServiceItem, NavItem, TeamMember, BlogPost } from './types';
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', path: '/' },
@@ -49,105 +49,6 @@ export const SERVICES: ServiceItem[] = [
   }
 ];
 
-export const PROJECTS: ProjectItem[] = [
-  {
-    slug: 'finedge-platform',
-    title: 'FinEdge Platform',
-    client: 'FinEdge Corp',
-    tags: ['FinTech', 'React', 'Node.js'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop',
-    description: 'A real-time trading dashboard handling millions of transactions with sub-millisecond latency.',
-    category: 'Enterprise',
-    fullDescription: 'FinEdge required a complete overhaul of their legacy trading infrastructure. The goal was to build a high-frequency trading dashboard that could visualize complex market data in real-time without compromising performance.',
-    challenge: 'The existing system suffered from significant latency issues during market peaks, leading to lost trading opportunities. The UI was cluttered and difficult for traders to parse quickly.',
-    solution: 'We architected a WebSocket-based streaming architecture using Node.js and a highly optimized React frontend with Web Workers for off-main-thread data processing. The UI was redesigned with a focus on data density and readability.',
-    stack: ['React', 'TypeScript', 'Node.js', 'WebSockets', 'D3.js', 'Redis'],
-    gallery: [
-      'https://images.unsplash.com/photo-1611974765270-ca12586343bb?q=80&w=2670&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop'
-    ]
-  },
-  {
-    slug: 'healthstream-ai',
-    title: 'HealthStream AI',
-    client: 'MedCore',
-    tags: ['HealthTech', 'Python', 'AI'],
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2670&auto=format&fit=crop',
-    description: 'Diagnostic assistance tool leveraging computer vision to analyze X-ray data securely.',
-    category: 'Enterprise',
-    fullDescription: 'MedCore needed a way to assist radiologists in detecting anomalies in X-ray scans more efficiently. Security and accuracy were paramount.',
-    challenge: 'Processing high-resolution medical imaging data requires significant computational power, and patient data privacy regulations (HIPAA) imposed strict constraints on data handling.',
-    solution: 'We developed a hybrid edge-cloud architecture where initial processing happens locally on secure edge devices. The AI model was trained on a proprietary dataset to achieve 99.8% accuracy in anomaly detection.',
-    stack: ['Python', 'TensorFlow', 'React', 'AWS Lambda', 'PostgreSQL'],
-    gallery: [
-      'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2670&auto=format&fit=crop'
-    ]
-  },
-  {
-    slug: 'urban-flow',
-    title: 'Urban Flow',
-    client: 'SmartCity Initiative',
-    tags: ['IoT', 'Go', 'Data Viz'],
-    image: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2669&auto=format&fit=crop',
-    description: 'City-wide traffic management system visualizing sensor data for urban planners.',
-    category: 'Web',
-    fullDescription: 'Urban Flow is a visualization tool designed to help city planners understand traffic patterns and optimize infrastructure.',
-    challenge: 'Ingesting and visualizing data from thousands of IoT sensors across the city in real-time presented a massive scalability challenge.',
-    solution: 'We used Go for high-throughput data ingestion and Mapbox GL JS for rendering interactive, 3D visualizations of traffic flows on the frontend.',
-    stack: ['Go', 'TimescaleDB', 'React', 'Mapbox GL', 'Docker'],
-    gallery: [
-      'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2613&auto=format&fit=crop'
-    ]
-  },
-  {
-    slug: 'velocita-commerce',
-    title: 'Velocita Commerce',
-    client: 'Velocita',
-    tags: ['E-commerce', 'Next.js', 'Stripe'],
-    image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?q=80&w=2664&auto=format&fit=crop',
-    description: 'Headless e-commerce solution increasing conversion rates by 40% through performance optimization.',
-    category: 'Web',
-    fullDescription: 'Velocita wanted to decouple their frontend from their backend to improve site speed and marketing agility.',
-    challenge: 'The legacy monolithic platform was slow and difficult to update. Page load times were hurting conversion rates.',
-    solution: 'We built a headless storefront using Next.js and Shopify Storefront API. This reduced page load times by 60% and allowed for rapid UI iterations.',
-    stack: ['Next.js', 'Shopify API', 'Tailwind CSS', 'Vercel'],
-    gallery: [
-      'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2670&auto=format&fit=crop'
-    ]
-  },
-  {
-    slug: 'aerospace-ops',
-    title: 'AeroSpace Ops',
-    client: 'Stellar Dynamics',
-    tags: ['Enterprise', 'Rust', 'WebAssembly'],
-    image: 'https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=2670&auto=format&fit=crop',
-    description: 'Mission control dashboard providing real-time telemetry and resource management for satellite arrays.',
-    category: 'Enterprise',
-    fullDescription: 'Stellar Dynamics needed a reliable, low-latency dashboard to monitor their satellite constellation.',
-    challenge: 'The system needed to handle binary telemetry streams and visualize orbital mechanics with zero dropped frames.',
-    solution: 'We utilized Rust and WebAssembly to parse binary data directly in the browser, achieving near-native performance for the visualization engine.',
-    stack: ['Rust', 'WebAssembly', 'React', 'Three.js', 'gRPC'],
-    gallery: [
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop'
-    ]
-  },
-  {
-    slug: 'cryptovault',
-    title: 'CryptoVault',
-    client: 'BlockSecure',
-    tags: ['Web3', 'Solidity', 'React Native'],
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2632&auto=format&fit=crop',
-    description: 'Non-custodial mobile wallet with multi-chain support and biometric security integration.',
-    category: 'Mobile',
-    fullDescription: 'BlockSecure aimed to create a user-friendly mobile wallet that didnt compromise on security.',
-    challenge: 'Balancing the complexity of blockchain interactions with a simple, intuitive user experience for non-technical users.',
-    solution: 'We built a React Native app with a secure key management system protected by device biometrics. The UI abstracts away gas fees and chain switching.',
-    stack: ['React Native', 'Ethers.js', 'Solidity', 'Node.js'],
-    gallery: [
-      'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=2555&auto=format&fit=crop'
-    ]
-  }
-];
 
 export const BLOG_POSTS: BlogPost[] = [
   {
