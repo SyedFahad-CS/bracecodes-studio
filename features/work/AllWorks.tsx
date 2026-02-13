@@ -46,7 +46,7 @@ const AllWorks: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="aspect-[3/2] rounded-2xl bg-slate-200 mb-8" />
+                <div className="aspect-3/2 rounded-2xl bg-slate-200 mb-8" />
                 <div className="h-6 bg-slate-200 rounded w-1/2 mb-3" />
                 <div className="h-4 bg-slate-200 rounded w-3/4" />
               </div>
@@ -88,7 +88,7 @@ const AllWorks: React.FC = () => {
                 <ScrollReveal key={project._id} delay={index * 100}>
                   <Link to={`/work/${project.slug.current}`} className="group cursor-pointer block">
                     {/* Image Container */}
-                    <div className="relative aspect-[3/2] rounded-2xl overflow-hidden mb-8 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] group-hover:-translate-y-2">
+                    <div className="relative aspect-3/2 rounded-2xl overflow-hidden mb-8 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] group-hover:-translate-y-2">
                       {project.mainImage ? (
                         <img
                           src={urlFor(project.mainImage).width(1000).quality(85).url()}

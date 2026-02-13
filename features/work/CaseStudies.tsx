@@ -68,7 +68,7 @@ const CaseStudies: React.FC = () => {
                                                 <span className="text-slate-300 text-sm">No Image</span>
                                             </div>
                                         )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </div>
 
                                     <div className="p-8">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navigation from './components/layout/Navigation';
 import Footer from './components/layout/Footer';
@@ -13,16 +13,16 @@ import Team from './features/team/Team';
 import Contact from './features/contact/Contact';
 
 // Lazy load route-specific components for code-splitting
-const AllWorks = React.lazy(() => import('./features/work/AllWorks'));
-const ProjectDetail = React.lazy(() => import('./features/work/ProjectDetail'));
-const CaseStudies = React.lazy(() => import('./features/work/CaseStudies'));
-const Blog = React.lazy(() => import('./features/blog/Blog'));
-const BlogPost = React.lazy(() => import('./features/blog/BlogPost'));
-const Community = React.lazy(() => import('./features/community/Community'));
-const MiniSaaS = React.lazy(() => import('./features/services/MiniSaas'));
+const AllWorks = lazy(() => import('./features/work/AllWorks'));
+const ProjectDetail = lazy(() => import('./features/work/ProjectDetail'));
+const CaseStudies = lazy(() => import('./features/work/CaseStudies'));
+const Blog = lazy(() => import('./features/blog/Blog'));
+const BlogPost = lazy(() => import('./features/blog/BlogPost'));
+const Community = lazy(() => import('./features/community/Community'));
+const MiniSaaS = lazy(() => import('./features/services/MiniSaas'));
 
 // Sanity Studio (embedded CMS dashboard)
-const SanityStudioPage = React.lazy(() => import('./features/studio/StudioPage'));
+const SanityStudioPage = lazy(() => import('./features/studio/StudioPage'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();

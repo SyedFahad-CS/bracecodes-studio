@@ -31,8 +31,7 @@ const Hero: React.FC = () => {
 
             {/* Subcopy */}
             <p className="text-lg md:text-xl text-slate-500 max-w-lg mb-10 leading-relaxed opacity-0 animate-[fadeIn_0.8s_0.8s_forwards]">
-              Bracecodes is a premium software studio specializing in scalable web architecture,
-              mobile experiences, and enterprise-grade infrastructure. We build the future, pixel by pixel.
+              Bracecodes is a modern software studio building fast, scalable, and visually striking web experiences using Next.js, React, and performance-first architecture.
             </p>
 
             {/* CTA Buttons */}

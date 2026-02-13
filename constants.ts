@@ -118,11 +118,11 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    name: 'Alex Chen',
+    name: 'Syed Fahad',
     role: 'Principal Architect',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2787&auto=format&fit=crop',
-    bio: 'Ex-Google engineer with 15+ years in distributed systems and cloud infrastructure.',
-    social: { twitter: '#', linkedin: '#', github: '#' }
+    image: 'https://res.cloudinary.com/dhwrnmpds/image/upload/v1763799225/IMG-20240414-WA0005-01_1_prjivw.jpg',
+    bio: 'A full stack developer with 5+ years of experience in building web applications.',
+    social: { twitter: 'https://x.com/syedf', linkedin: '#', github: '#' }
   },
   {
     name: 'Sarah Miller',

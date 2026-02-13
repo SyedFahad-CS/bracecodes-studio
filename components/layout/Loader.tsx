@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Layers } from 'lucide-react';
 
 interface LoaderProps {

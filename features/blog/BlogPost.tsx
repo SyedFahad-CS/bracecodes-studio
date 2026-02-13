@@ -197,7 +197,7 @@ const BlogPost: React.FC = () => {
 
                 <div className="mt-16 pt-8 border-t border-slate-100">
                     <div className="bg-slate-50 rounded-2xl p-8 flex flex-col md:flex-row gap-6 items-center md:items-start text-center md:text-left">
-                        <div className="w-20 h-20 rounded-full bg-slate-200 flex-shrink-0 mx-auto md:mx-0 overflow-hidden">
+                        <div className="w-20 h-20 rounded-full bg-slate-200 shrink-0 mx-auto md:mx-0 overflow-hidden">
                             <User className="w-full h-full p-4 text-slate-400" />
                         </div>
                         <div>

@@ -81,7 +81,7 @@ const Work: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20 max-w-7xl mx-auto">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="aspect-[3/2] rounded-2xl bg-slate-200 mb-6" />
+                <div className="aspect-3/2 rounded-2xl bg-slate-200 mb-6" />
                 <div className="h-6 bg-slate-200 rounded w-1/2 mb-3" />
                 <div className="h-4 bg-slate-200 rounded w-1/3 mb-3" />
                 <div className="h-4 bg-slate-200 rounded w-3/4" />
@@ -117,7 +117,7 @@ const Work: React.FC = () => {
                 >
                   <Link to={`/work/${project.slug.current}`} className="block h-full">
                     {/* Image Container */}
-                    <div className="relative aspect-[3/2] rounded-2xl overflow-hidden mb-6 shadow-[0_2px_10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.2)]">
+                    <div className="relative aspect-3/2 rounded-2xl overflow-hidden mb-6 shadow-[0_2px_10px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.2)]">
                       {project.mainImage ? (
                         <img
                           src={urlFor(project.mainImage).width(800).quality(80).url()}
@@ -132,7 +132,7 @@ const Work: React.FC = () => {
                       )}
 
                       {/* Overlay Gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                      <div className="absolute inset-0 bg-linear-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                       {/* View Project Button Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
