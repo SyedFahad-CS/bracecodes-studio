@@ -30,10 +30,10 @@ const Team: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {TEAM_MEMBERS.map((member, index) => (
+          {TEAM_MEMBERS.map((member: any, index: number) => (
             <ScrollReveal key={index} delay={index * 100}>
               <div className="group relative">
-                <div className="relative overflow-hidden rounded-[2rem] mb-6 aspect-[3/4] shadow-[0_8px_30px_rgb(0,0,0,0.04)] group-hover:shadow-[0_20px_40px_-10px_rgba(79,70,229,0.15)] transition-all duration-500">
+                <div className="relative overflow-hidden rounded-4xl mb-6 aspect-3/4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group-hover:shadow-[0_20px_40px_-10px_rgba(79,70,229,0.15)] transition-all duration-500">
                   {/* Image */}
                   <img
                     src={`${member.image}?w=400&q=85`}
@@ -43,7 +43,7 @@ const Team: React.FC = () => {
                   />
 
                   {/* Social Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 flex justify-center gap-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent">
+                  <div className="absolute inset-x-0 bottom-0 p-6 flex justify-center gap-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] bg-linear-to-t from-slate-900/90 via-slate-900/40 to-transparent">
                     {member.social.twitter && (
                       <a href={member.social.twitter} className="p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white hover:text-slate-900 transition-colors">
                         <Twitter className="w-4 h-4" />

@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
             If you scrolled this far,
           </p>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-16">
-            It's time to <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">Build Something Together</span>
+            It's time to <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-violet-400">Build Something Together</span>
           </h2>
 
           {/* Skeuomorphic Button */}
@@ -31,10 +31,10 @@ const Footer: React.FC = () => {
               {/* The Button Itself */}
               <Link
                 to="/contact"
-                className="w-full relative h-24 bg-gradient-to-b from-indigo-500 to-indigo-700 rounded-[2rem] flex items-center justify-between px-10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-4px_6px_rgba(0,0,0,0.4),0_4px_8px_rgba(0,0,0,0.2)] active:scale-[0.98] active:translate-y-1 transition-all overflow-hidden"
+                className="w-full relative h-24 bg-linear-to-b from-indigo-500 to-indigo-700 rounded-4xl flex items-center justify-between px-10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-4px_6px_rgba(0,0,0,0.4),0_4px_8px_rgba(0,0,0,0.2)] active:scale-[0.98] active:translate-y-1 transition-all overflow-hidden"
               >
                 {/* Glass Reflection */}
-                <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
+                <div className="absolute top-0 left-0 right-0 h-1/2 bg-linear-to-b from-white/20 to-transparent pointer-events-none" />
 
                 {/* Text */}
                 <span className="font-mono text-2xl md:text-3xl font-bold tracking-wider text-white drop-shadow-md">
