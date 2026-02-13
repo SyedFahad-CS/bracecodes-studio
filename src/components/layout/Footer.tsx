@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
 
       {/* Background Watermark */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full select-none pointer-events-none overflow-hidden leading-none z-0">
-        <h1 className="text-[18vw] md:text-[10vw] m-4 p-4 md:m-8 md:p-8 font-display font-bold text-slate-800 text-center tracking-tighter whitespace-nowrap opacity-50 transform translate-y-1/4">
+        <h1 className="text-[10vw] md:text-[10vw] m-8 p-8 font-display font-bold text-slate-800 text-center tracking-tighter whitespace-nowrap opacity-50 transform translate-y-1/4">
           BRACECODES
         </h1>
       </div>
