@@ -6,14 +6,14 @@ const Contact: React.FC = () => {
   return (
     <section className="py-20 px-4 md:px-8 bg-white">
       <ScrollReveal>
-        <div className="max-w-7xl mx-auto bg-slate-900 rounded-[3rem] p-12 md:p-24 relative overflow-hidden text-center md:text-left">
+        <div className="max-w-7xl mx-auto bg-slate-900 rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-24 relative overflow-hidden text-center md:text-left">
 
           {/* Background Gradient Mesh inside the card */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/20 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
 
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="max-w-2xl">
-              <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-8">
+              <h2 className="text-4xl md:text-7xl font-bold text-white tracking-tight mb-8">
                 Let's build something <span className="text-indigo-400">extraordinary.</span>
               </h2>
               <p className="text-xl text-slate-400 mb-10 max-w-lg">

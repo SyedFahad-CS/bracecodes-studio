@@ -45,7 +45,7 @@ const App: React.FC = () => {
     return (
       <Suspense fallback={
         <div className="h-screen w-screen flex items-center justify-center bg-white">
-          <p className="text-slate-400 text-sm font-medium">Loading Studio…</p>
+          <p className="text-slate-600 text-sm font-medium">Loading Studio…</p>
         </div>
       }>
         <SanityStudioPage />

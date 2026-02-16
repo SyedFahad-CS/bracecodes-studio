@@ -20,7 +20,8 @@
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^7.13.0",
     "sanity": "^5.9.0",
-    "styled-components": "^6.3.9"
+    "styled-components": "^6.3.9",
+    "tech-stack-icons": "^3.5.8"
   },
   "devDependencies": {
     "@sanity/vision": "^5.9.0",
