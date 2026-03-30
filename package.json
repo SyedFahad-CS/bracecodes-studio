@@ -27,9 +27,9 @@
     "@sanity/vision": "^5.9.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "tailwindcss": "^4.1.18",
     "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "vite": "^8.0.3"
   }
 }
