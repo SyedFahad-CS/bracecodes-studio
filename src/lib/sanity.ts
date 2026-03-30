@@ -15,6 +15,15 @@ export function urlFor(source: any) {
   return builder.image(source);
 }
 
+// Generate srcset for responsive images
+export function srcSetFor(source: any, widths = [400, 800, 1200], quality = 80) {
+  return widths
+    .map(w => `${urlFor(source).width(w).quality(quality).url()} ${w}w`)
+    .join(', ');
+}
+
+export const defaultSizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
+
 // GROQ Queries
 export const allPostsQuery = `
   *[_type == "blogPost"] | order(publishedAt desc) {

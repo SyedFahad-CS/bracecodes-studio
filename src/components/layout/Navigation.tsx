@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { NAV_ITEMS } from '../../constants';
 import { X } from 'lucide-react';
@@ -9,18 +9,20 @@ const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
+  const scrolledRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
-      if (isScrolled !== scrolled) {
+      if (isScrolled !== scrolledRef.current) {
+        scrolledRef.current = isScrolled;
         setScrolled(isScrolled);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
+  }, []);
 
   // Lock body scroll when menu is open
   useEffect(() => {

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import RevealText from '../../components/animations/RevealText';
+import SEO from '../../components/SEO';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSanityQuery } from '../../hooks/useSanity';
-import { allProjectsQuery, urlFor } from '../../lib/sanity';
+import { allProjectsQuery, urlFor, srcSetFor, defaultSizes } from '../../lib/sanity';
 import type { SanityProject } from '../../types';
 
 const AllWorks: React.FC = () => {
@@ -18,8 +19,9 @@ const AllWorks: React.FC = () => {
     ? (projects ?? [])
     : (projects ?? []).filter(p => (p.tags ?? []).includes(filter));
 
-  return (
+    return (
     <div className="pt-32 pb-20 bg-slate-50 min-h-screen">
+      <SEO title="Our Work" description="Explore our archive of enterprise-grade applications, scalable platforms, and digital experiences." />
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Header */}
@@ -92,8 +94,11 @@ const AllWorks: React.FC = () => {
                       {project.mainImage ? (
                         <img
                           src={urlFor(project.mainImage).width(1000).quality(85).url()}
+                          srcSet={srcSetFor(project.mainImage, [400, 800, 1200], 85)}
+                          sizes={defaultSizes}
                           alt={project.mainImage.alt || project.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          loading="lazy"
                           decoding="async"
                         />
                       ) : (

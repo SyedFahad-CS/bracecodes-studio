@@ -5,8 +5,9 @@ import { motion } from 'framer-motion';
 import { PortableText } from '@portabletext/react';
 import type { PortableTextComponents } from '@portabletext/react';
 import { useSanityQuery } from '../../hooks/useSanity';
-import { postBySlugQuery, urlFor } from '../../lib/sanity';
+import { postBySlugQuery, urlFor, srcSetFor, defaultSizes } from '../../lib/sanity';
 import type { SanityBlogPostFull } from '../../types';
+import SEO from '../../components/SEO';
 
 const portableTextComponents: PortableTextComponents = {
     types: {
@@ -16,8 +17,12 @@ const portableTextComponents: PortableTextComponents = {
                 <figure className="my-12">
                     <img
                         src={urlFor(value).width(1200).quality(90).url()}
+                        srcSet={srcSetFor(value, [400, 800, 1200], 85)}
+                        sizes="(max-width: 640px) 100vw, 80vw"
                         alt={value.alt || ''}
                         className="rounded-2xl shadow-lg w-full"
+                        loading="lazy"
+                        decoding="async"
                     />
                     {value.caption && (
                         <figcaption className="text-center text-sm text-slate-500 mt-3">{value.caption}</figcaption>
@@ -108,6 +113,7 @@ const BlogPost: React.FC = () => {
 
     return (
         <article className="min-h-screen bg-white">
+            <SEO title={post.title} description={post.excerpt} />
             {/* Minimal Header */}
             <div className="pt-32 pb-12 bg-white">
                 <div className="container mx-auto px-6 max-w-3xl">
@@ -175,6 +181,8 @@ const BlogPost: React.FC = () => {
                     >
                         <img
                             src={urlFor(post.mainImage).width(1600).quality(90).url()}
+                            srcSet={srcSetFor(post.mainImage, [800, 1200, 1600], 90)}
+                            sizes="100vw"
                             alt={post.mainImage.alt || post.title}
                             className="absolute inset-0 w-full h-full object-cover"
                         />

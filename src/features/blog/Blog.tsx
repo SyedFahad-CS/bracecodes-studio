@@ -1,14 +1,16 @@
 import { Calendar, User, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSanityQuery } from '../../hooks/useSanity';
-import { allPostsQuery, urlFor } from '../../lib/sanity';
+import { allPostsQuery, urlFor, srcSetFor, defaultSizes } from '../../lib/sanity';
 import type { SanityBlogPost } from '../../types';
+import SEO from '../../components/SEO';
 
 const Blog: React.FC = () => {
     const { data: posts, loading, error } = useSanityQuery<SanityBlogPost[]>(allPostsQuery);
 
     return (
         <div className="pt-32 pb-20 container mx-auto px-6 md:px-12 min-h-screen">
+            <SEO title="Blog" description="Engineering patterns, design philosophies, and lessons from the trenches." />
             <div className="mb-16 text-center max-w-2xl mx-auto">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">Thoughts & Insights</h1>
                 <p className="text-xl text-slate-500">
@@ -52,8 +54,12 @@ const Blog: React.FC = () => {
                                     {post.mainImage ? (
                                         <img
                                             src={urlFor(post.mainImage).width(800).quality(80).url()}
+                                            srcSet={srcSetFor(post.mainImage)}
+                                            sizes={defaultSizes}
                                             alt={post.mainImage.alt || post.title}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-slate-100 flex items-center justify-center">

@@ -39,6 +39,7 @@ const Team: React.FC = () => {
                     src={`${member.image}?w=400&q=85`}
                     alt={member.name}
                     className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                    loading="lazy"
                     decoding="async"
                   />
 

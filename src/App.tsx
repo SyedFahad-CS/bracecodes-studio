@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navigation from './components/layout/Navigation';
 import Footer from './components/layout/Footer';
 import Background from './components/layout/Background';
 import Loader from './components/layout/Loader';
+import SEO from './components/SEO';
 import Hero from './features/hero/Hero';
 import Services from './features/services/Services';
 import WhatWeDo from './features/services/WhatWeDo';
@@ -24,6 +25,15 @@ const MiniSaaS = React.lazy(() => import('./features/services/MiniSaas'));
 // Sanity Studio (embedded CMS dashboard)
 const SanityStudioPage = React.lazy(() => import('./features/studio/StudioPage'));
 
+const PageLoader: React.FC = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-8 h-8 border-2 border-slate-200 border-t-indigo-600 rounded-full animate-spin" />
+  </div>
+);
+
+// Track if the preloader has already played this session
+let hasPreloaded = false;
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -35,7 +45,7 @@ const ScrollToTop = () => {
 };
 
 const App: React.FC = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasPreloaded);
   const location = useLocation();
 
   // Studio gets its own isolated shell — no nav, footer, background, or preloader
@@ -60,13 +70,17 @@ const App: React.FC = () => {
       {/* Noise Overlay */}
       <div className="noise-bg" />
 
+      <SEO />
+
       {/* WebGL/Canvas Background */}
       <Background />
 
-      {/* Custom Preloader */}
-      <div className={`fixed inset-0 z-50 transition-transform duration-1000 ease-[cubic-bezier(0.87,0,0.13,1)] ${loading ? 'translate-y-0' : '-translate-y-full'}`}>
-        {loading && <Loader onComplete={() => setLoading(false)} />}
-      </div>
+      {/* Custom Preloader — only on first visit */}
+      {loading && (
+        <div className={`fixed inset-0 z-50 transition-transform duration-1000 ease-[cubic-bezier(0.87,0,0.13,1)] ${loading ? 'translate-y-0' : '-translate-y-full'}`}>
+          <Loader onComplete={() => { hasPreloaded = true; setLoading(false); }} />
+        </div>
+      )}
 
       {/* App Content */}
       <div className={`transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
@@ -87,14 +101,14 @@ const App: React.FC = () => {
             } />
 
             <Route path="/work" element={
-              <Suspense fallback={<div className="min-h-screen" />}>
+              <Suspense fallback={<PageLoader />}>
                 <AllWorks />
                 <Contact />
               </Suspense>
             } />
 
             <Route path="/work/:slug" element={
-              <Suspense fallback={<div className="min-h-screen" />}>
+              <Suspense fallback={<PageLoader />}>
                 <ProjectDetail />
                 <Contact />
               </Suspense>
@@ -129,31 +143,31 @@ const App: React.FC = () => {
             } />
 
             <Route path="/case-studies" element={
-              <Suspense fallback={<div className="min-h-screen" />}>
+              <Suspense fallback={<PageLoader />}>
                 <CaseStudies />
               </Suspense>
             } />
 
             <Route path="/blog" element={
-              <Suspense fallback={<div className="min-h-screen" />}>
+              <Suspense fallback={<PageLoader />}>
                 <Blog />
               </Suspense>
             } />
 
             <Route path="/blog/:slug" element={
-              <Suspense fallback={<div className="min-h-screen" />}>
+              <Suspense fallback={<PageLoader />}>
                 <BlogPost />
               </Suspense>
             } />
 
             <Route path="/community" element={
-              <Suspense fallback={<div className="min-h-screen" />}>
+              <Suspense fallback={<PageLoader />}>
                 <Community />
               </Suspense>
             } />
 
             <Route path="/mini-saas" element={
-              <Suspense fallback={<div className="min-h-screen" />}>
+              <Suspense fallback={<PageLoader />}>
                 <MiniSaaS />
               </Suspense>
             } />

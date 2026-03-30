@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { client } from '../lib/sanity';
 
 interface SanityQueryResult<T> {
@@ -14,6 +14,8 @@ export function useSanityQuery<T = any>(
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    const paramsKey = useMemo(() => JSON.stringify(params), [params]);
 
     useEffect(() => {
         let cancelled = false;
@@ -44,7 +46,7 @@ export function useSanityQuery<T = any>(
         return () => {
             cancelled = true;
         };
-    }, [query, JSON.stringify(params)]);
+    }, [query, paramsKey]);
 
     return { data, loading, error };
 }

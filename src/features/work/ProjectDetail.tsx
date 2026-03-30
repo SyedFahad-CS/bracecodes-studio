@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import RevealText from '../../components/animations/RevealText';
+import SEO from '../../components/SEO';
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Layers, Cpu } from 'lucide-react';
 import { useSanityQuery } from '../../hooks/useSanity';
-import { projectBySlugQuery, allProjectsQuery, urlFor } from '../../lib/sanity';
+import { projectBySlugQuery, allProjectsQuery, urlFor, srcSetFor, defaultSizes } from '../../lib/sanity';
 import type { SanityProjectFull, SanityProject } from '../../types';
 
 const ProjectDetail: React.FC = () => {
@@ -76,6 +77,7 @@ const ProjectDetail: React.FC = () => {
 
     return (
         <div className="bg-slate-50 min-h-screen">
+            <SEO title={project.title} description={project.description} />
             {/* Hero Section */}
             <section className="pt-32 pb-16 relative overflow-hidden">
                 <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -122,6 +124,8 @@ const ProjectDetail: React.FC = () => {
                             {project.mainImage ? (
                                 <img
                                     src={urlFor(project.mainImage).width(1600).quality(95).url()}
+                                    srcSet={srcSetFor(project.mainImage, [800, 1200, 1600, 2000], 90)}
+                                    sizes="100vw"
                                     alt={project.mainImage.alt || project.title}
                                     className="w-full h-full object-cover"
                                 />
@@ -213,8 +217,12 @@ const ProjectDetail: React.FC = () => {
                                         <div className={`rounded-2xl overflow-hidden shadow-md ${idx % 3 === 0 ? 'aspect-21/9' : 'aspect-video'}`}>
                                             <img
                                                 src={urlFor(img).width(1200).quality(90).url()}
+                                                srcSet={srcSetFor(img, [400, 800, 1200], 85)}
+                                                sizes="(max-width: 640px) 100vw, 80vw"
                                                 alt={img.alt || `${project.title} detail ${idx + 1}`}
                                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                                                loading="lazy"
+                                                decoding="async"
                                             />
                                         </div>
                                     </ScrollReveal>

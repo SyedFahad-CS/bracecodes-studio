@@ -118,31 +118,31 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    name: 'Alex Chen',
-    role: 'Principal Architect',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2787&auto=format&fit=crop',
-    bio: 'Ex-Google engineer with 15+ years in distributed systems and cloud infrastructure.',
-    social: { twitter: '#', linkedin: '#', github: '#' }
+    name: 'Raqib Yousf',
+    role: 'Senior Software Engineer',
+    image: 'https://res.cloudinary.com/dhwrnmpds/image/upload/v1774874203/raqib_dltjmx.jpg',
+    bio: 'Specializing in building scalable web and mobile applications.',
+    social: { twitter: '#', linkedin: 'https://www.linkedin.com/in/raqib-yousuf/', github: '#' }
   },
   {
-    name: 'Sarah Miller',
-    role: 'Design Director',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop',
+    name: 'Sajad Mir',
+    role: 'UI/UX Developer',
+    image: 'https://res.cloudinary.com/dhwrnmpds/image/upload/v1774874791/491865992_1257116289175154_195062758135064820_n_tibeki.jpg',
     bio: 'Award-winning UX specialist focused on human-centric enterprise interfaces.',
-    social: { linkedin: '#', twitter: '#' }
+    social: { linkedin: 'https://www.linkedin.com/in/sajad-mir-270041106/', twitter: '#' }
   },
   {
-    name: 'Marcus Thorne',
-    role: 'Lead DevOps',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2787&auto=format&fit=crop',
-    bio: 'Kubernetes contributor and automation obsessive. Ensures 99.99% uptime for clients.',
-    social: { github: '#', linkedin: '#' }
+    name: 'Aayash Ahmad',
+    role: 'Software Developer',
+    image: 'https://res.cloudinary.com/dhwrnmpds/image/upload/v1774874565/1748609766145_hhhvlg.jpg',
+    bio: 'Specializing in building scalable web and mobile applications.',
+    social: { github: '#', linkedin: 'https://www.linkedin.com/in/aayash-ahmad-185036242/' }
   },
   {
-    name: 'Elena Rodriguez',
-    role: 'Head of Product',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2788&auto=format&fit=crop',
-    bio: 'Bridging the gap between complex business requirements and technical execution.',
-    social: { linkedin: '#', twitter: '#' }
+    name: 'Syed Fahad',
+    role: 'Junior Software Engineer',
+    image: 'https://res.cloudinary.com/dhwrnmpds/image/upload/v1774334600/WhatsApp_Image_2025-08-30_at_14.10.23_912f508c_c0djyl.jpg',
+    bio: 'Specializing in building scalable web and mobile applications',
+    social: { linkedin: 'https://www.linkedin.com/in/syed-fahad-cs/', github: 'https://github.com/syedfahad-cs' }
   }
 ];

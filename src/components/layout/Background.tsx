@@ -50,12 +50,8 @@ const Background: React.FC = () => {
 
     let animationFrameId: number;
 
-    const render = (timestamp: number) => {
-      animationFrameId = requestAnimationFrame(render);
-
+    const drawParticles = () => {
       ctx.clearRect(0, 0, width, height);
-
-      // Draw particles
       for (let i = 0; i < particleCount; i++) {
         const p = particles[i];
         p.x += p.vx;
@@ -71,7 +67,6 @@ const Background: React.FC = () => {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Connect nearby particles — only check forward to halve iterations
         for (let j = i + 1; j < particleCount; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
@@ -97,53 +92,20 @@ const Background: React.FC = () => {
           isPaused = true;
         } else {
           isPaused = false;
-          animationFrameId = requestAnimationFrame(render);
+          animationFrameId = requestAnimationFrame(loop);
         }
       };
 
       document.addEventListener('visibilitychange', handleVisibilityChange);
 
-      const renderWithPause = (timestamp: number) => {
+      const loop = () => {
         if (!isPaused) {
-          animationFrameId = requestAnimationFrame(renderWithPause);
-          ctx.clearRect(0, 0, width, height);
-
-          // Draw particles
-          for (let i = 0; i < particleCount; i++) {
-            const p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-
-            if (p.x < 0) p.x = width;
-            if (p.x > width) p.x = 0;
-            if (p.y < 0) p.y = height;
-            if (p.y > height) p.y = 0;
-
-            ctx.fillStyle = 'rgba(79, 70, 229, 0.12)';
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Connect nearby particles — only check forward to halve iterations
-            for (let j = i + 1; j < particleCount; j++) {
-              const p2 = particles[j];
-              const dx = p.x - p2.x;
-              const dy = p.y - p2.y;
-              const distSq = dx * dx + dy * dy;
-              if (distSq < maxDistSq) {
-                const alpha = 0.04 * (1 - distSq / maxDistSq);
-                ctx.strokeStyle = `rgba(79, 70, 229, ${alpha})`;
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.stroke();
-              }
-            }
-          }
+          animationFrameId = requestAnimationFrame(loop);
+          drawParticles();
         }
       };
 
-      animationFrameId = requestAnimationFrame(renderWithPause);
+      animationFrameId = requestAnimationFrame(loop);
 
       return () => {
         window.removeEventListener('resize', handleResize);
