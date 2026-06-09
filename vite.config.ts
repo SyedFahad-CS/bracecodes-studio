@@ -11,13 +11,32 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
     },
     plugins: [react(), tailwindcss()],
-    define: {
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-    },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(__dirname, './src'),
+      }
+    },
+    build: {
+      chunkSizeWarningLimit: 8000,
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              {
+                name: 'vendor-sanity',
+                test: (id) => id.includes('sanity') || id.includes('@sanity') || id.includes('@mux/mux-player'),
+              },
+              {
+                name: 'vendor-react',
+                test: (id) => id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom'),
+              },
+              {
+                name: 'vendor-framer',
+                test: (id) => id.includes('framer-motion'),
+              }
+            ]
+          }
+        }
       }
     }
   };
